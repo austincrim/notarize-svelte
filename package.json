@@ -20,9 +20,8 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
-        "gray-matter": "^4.0.2",
-        "remark": "^13.0.0",
-        "remark-html": "^13.0.1",
+        "@tailwindcss/typography": "^0.3.1",
+        "marked": "^1.2.7",
         "sirv-cli": "^1.0.0"
     }
 }

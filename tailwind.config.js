@@ -5,16 +5,23 @@ module.exports = {
 
         options: {
             whitelistPatterns: [/svelte-/],
-            defaultExtractor: (content) =>
-                [...content.matchAll(/(?:class:)*([\w\d-/:%.]+)/gm)].map(([_match, group, ..._rest]) => group),
+            defaultExtractor: content =>
+                [...content.matchAll(/(?:class:)*([\w\d-/:%.]+)/gm)].map(
+                    ([_match, group, ..._rest]) => group
+                ),
         },
     },
 
     theme: {
         extend: {},
     },
-    variants: {},
-    plugins: [],
+    variants: {
+        extend: {
+            backgroundColor: ['active'],
+            translate: ['active'],
+        },
+    },
+    plugins: [require('@tailwindcss/typography')],
     future: {
         // purgeLayersByDefault: true,
         // removeDeprecatedGapUtilities: true,
