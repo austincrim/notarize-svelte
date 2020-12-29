@@ -1,5 +1,2 @@
 [build]
   functions = "functions/"
-
-[context.production]
-  environment = { HELLO = "WORLD"}

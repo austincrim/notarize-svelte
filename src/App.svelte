@@ -1,19 +1,18 @@
 <script>
 	import Tailwindcss from "./Tailwindcss.svelte";
 	import NotePreview from "./components/NotePreview.svelte";
+	import { notesStore } from "./stores/notesStore";
 </script>
 
 <Tailwindcss />
 <main>
 	<div class="grid grid-cols-3 gap-4 p-2">
 		<ul class="border-r min-h-screen px-4">
-			<NotePreview title="I'm a note!" dateEdited={new Date()} />
-			<NotePreview
-				title="Me too, but a little different"
-				dateEdited={new Date('2020-11-10')} />
-			<NotePreview
-				title="I have a loooong title, but that's ok, I'm still valuable!"
-				dateEdited={new Date('2019-03-23')} />
+			{#each $notesStore as note}
+				<NotePreview
+					title={note.title}
+					dateEdited={notesStore.dateEdited} />
+			{/each}
 		</ul>
 		<div class="col-span-2 p-4 max-w-4xl">
 			<div class="flex flex-col gap-2">

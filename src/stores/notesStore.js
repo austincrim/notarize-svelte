@@ -1,3 +1,5 @@
-import { readable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-// const notes = readable();
+const notes = fetch(`${process.env.URL}/.netlify/functions/hello`).then(res => res.json());
+
+export const notesStore = writable(notes);
