@@ -2,8 +2,10 @@
 	import Tailwindcss from "./Tailwindcss.svelte";
 	import NotePreview from "./components/NotePreview.svelte";
 	import Note from "./components/Note.svelte";
-	const notes = fetch("/.netlify/functions/hello").then((res) => res.json());
 
+	const notes = fetch("/.netlify/functions/getNotes").then((res) =>
+		res.json()
+	);
 	let selectedNote = null;
 </script>
 
