@@ -2,14 +2,27 @@
     export let note;
 
     import marked from "marked";
+    import { slide } from "svelte/transition";
+    import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
+    import { saveNote } from "../client/notes";
 
     let editing = false;
     let initialContent = note.content;
+
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation("/saveNote", saveNote, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("/getNotes");
+        },
+    });
 </script>
 
-<div class="flex justify-between">
+<div transition:slide class="flex justify-between">
     <div class="flex flex-col gap-2">
-        <h2 class="text-2xl">{note.title}</h2>
+        {#if !editing}
+            <h2 class="text-2xl">{note.title}</h2>
+        {:else}<input class="p-2" bind:value={note.title} />{/if}
         <div class="text-gray-600">
             {new Date(note.dateEdited).toLocaleDateString()}
         </div>
@@ -25,13 +38,8 @@
             <button
                 on:click={() => {
                     editing = false;
-                    fetch('/.netlify/functions/saveNote', {
-                        method: 'POST',
-                        body: JSON.stringify(note),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
+                    note = note;
+                    $mutation.mutate(note);
                 }}
                 class="px-4 py-2 rounded bg-green-200 text-green-900 hover:bg-green-300 hover:-translate-y-1 hover:shadow active:translate-y-0 transform transition-all">
                 Save

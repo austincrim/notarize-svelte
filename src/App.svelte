@@ -1,36 +1,38 @@
 <script>
-	import Tailwindcss from "./Tailwindcss.svelte";
+	import { useQuery } from "@sveltestack/svelte-query";
 	import NotePreview from "./components/NotePreview.svelte";
 	import Note from "./components/Note.svelte";
+	import { getNotes } from "./client/notes";
 
-	const notes = fetch("/.netlify/functions/getNotes").then((res) =>
-		res.json()
-	);
 	let selectedNote = null;
+
+	// $ is used when accessing result because useQuery is a Svelte store behind the scenes
+	// https://svelte.dev/docs#4_Prefix_stores_with_$_to_access_their_values
+	const queryResult = useQuery("/getNotes", getNotes, {
+		onSuccess: (data) => (selectedNote = data[0]),
+	});
 </script>
 
-<Tailwindcss />
 <main>
 	<div class="grid grid-cols-3 gap-4 p-2">
-		{#await notes}
+		{#if $queryResult.isLoading}
 			<p class="text-lg">loading...</p>
-		{:then notes}
+		{:else if $queryResult.isError}
+			<p class="text-lg">{queryResult.error}</p>
+		{:else}
 			<ul class="border-r min-h-screen px-4 space-y-4">
-				{#each notes as note}
+				{#each $queryResult.data as note}
 					<NotePreview
-						title={note.title}
-						dateEdited={new Date(note.dateEdited)}
+						{note}
 						selected={selectedNote === note}
 						on:click={() => (selectedNote = note)} />
 				{/each}
 			</ul>
-			{#if selectedNote}
-				<div class="col-span-2 p-4 max-w-4xl">
-					<Note note={selectedNote} />
-				</div>
-			{/if}
-		{:catch error}
-			{error}
-		{/await}
+		{/if}
+		{#if selectedNote}
+			<div class="col-span-2 p-4 max-w-4xl">
+				<Note note={selectedNote} />
+			</div>
+		{/if}
 	</div>
 </main>
