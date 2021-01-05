@@ -1,5 +1,5 @@
 <script>
-    import Tailwindcss from "./Tailwindcss.svelte";
+    import GlobalCss from "./GlobalCss.svelte";
     import {
         QueryClient,
         QueryClientProvider,
@@ -9,7 +9,7 @@
     const client = new QueryClient();
 </script>
 
-<Tailwindcss />
+<GlobalCss />
 
 <QueryClientProvider {client}>
     <App />
