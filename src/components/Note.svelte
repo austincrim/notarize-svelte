@@ -1,5 +1,5 @@
-<script>
-    export let note;
+<script lang="ts">
+    export let note: Note;
 
     import marked from "marked";
     import prism from "prismjs";
@@ -8,6 +8,7 @@
     import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
     import { saveNote } from "../client/notes";
     import Button from "./Button.svelte";
+    import type Note from "../types/Note";
 
     let editing = false;
     let initialContent = note.content;

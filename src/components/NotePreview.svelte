@@ -1,10 +1,11 @@
-<script>
-    export let note;
-    export let selected;
+<script lang="ts">
+    export let note: Note;
+    export let selected: boolean;
 
-    import { slide } from "svelte/transition";
+    import { scale } from "svelte/transition";
     import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
     import { deleteNote } from "../client/notes";
+    import type Note from "../types/Note";
 
     $: displayDate =
         new Date(note.dateEdited).getDate() === new Date().getDate()
@@ -17,12 +18,13 @@
         onMutate: async (deletedNote) => {
             await queryClient.cancelQueries("notes");
             const previousNotes = queryClient.getQueryData("notes");
-            queryClient.setQueryData("notes", (old) => [
+            queryClient.setQueryData("notes", (old: Array<Note>) => [
                 ...old.filter((note) => note.id !== deletedNote.id),
             ]);
+            return { previousNotes };
         },
-        onError: (error, deletedNote, context) => {
-            queryClient.setQueryData(context.previousNotes);
+        onError: (error, deletedNote, context: any) => {
+            queryClient.setQueryData("notes", context.previousNotes);
         },
         onSuccess: () => {
             queryClient.invalidateQueries("notes");
@@ -32,10 +34,10 @@
 
 <div
     on:click
-    transition:slide
+    transition:scale
     class={`flex justify-between gap-2 p-4 rounded ${selected && 'bg-gray-200'} hover:bg-gray-200 active:bg-gray-300 transition-all duration-100`}>
     <div class="flex flex-col gap-2">
-        <div class="text-lg font-mono">{note.title}</div>
+        <div class="text-lg font-serif">{note.title}</div>
         <div class="text-sm">{displayDate}</div>
     </div>
     <button
