@@ -37,6 +37,7 @@
             <Button
                 on:click={() => {
                     editing = false;
+                    note.dateEdited = new Date();
                     $notes = $notes;
                 }}
                 type="primary"
