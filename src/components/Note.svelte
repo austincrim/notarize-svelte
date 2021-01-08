@@ -5,8 +5,7 @@
     import prism from 'prismjs';
     import { afterUpdate } from 'svelte';
     import { slide } from 'svelte/transition';
-    import { useMutation, useQueryClient } from '@sveltestack/svelte-query';
-    import { saveNote } from '../client/notes';
+    import { notes } from '../stores/notes';
     import Button from './Button.svelte';
     import type Note from '../types/Note';
 
@@ -16,14 +15,6 @@
         new Date(note.dateEdited).getDate() === new Date().getDate()
             ? new Date(note.dateEdited).toLocaleTimeString()
             : new Date(note.dateEdited).toLocaleDateString();
-
-    const queryClient = useQueryClient();
-
-    const saveMutation = useMutation(saveNote, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('notes');
-        },
-    });
 
     afterUpdate(() => {
         prism.highlightAll();
@@ -35,7 +26,7 @@
         {#if !editing}
             <h2 class="text-2xl">{note.title}</h2>
         {:else}
-            <input class="bg-gray-100 p-2 rounded" bind:value={note.title} />
+            <input class="p-2 bg-gray-100 rounded" bind:value={note.title} />
         {/if}
         <div class="text-gray-600">{displayDate}</div>
     </div>
@@ -46,7 +37,8 @@
             <Button
                 on:click={() => {
                     editing = false;
-                    $saveMutation.mutate({ ...note, dateEdited: new Date() });
+                    note.dateEdited = new Date();
+                    $notes = $notes;
                 }}
                 type="primary"
             >
@@ -67,7 +59,7 @@
 {#if editing}
     <textarea
         bind:value={note.content}
-        class="bg-gray-100 mt-10 p-2 min-h-screen min-w-full rounded"
+        class="min-w-full min-h-screen p-2 mt-10 bg-gray-100 rounded"
     />
 {:else}
     <p class="mt-10 prose max-w-1/2">
