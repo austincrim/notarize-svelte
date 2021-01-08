@@ -1,16 +1,7 @@
 <script>
-    import GlobalCss from "./GlobalCss.svelte";
-    import {
-        QueryClient,
-        QueryClientProvider,
-    } from "@sveltestack/svelte-query";
-    import App from "./App.svelte";
-
-    const client = new QueryClient();
+    import GlobalCss from './GlobalCss.svelte';
+    import App from './App.svelte';
 </script>
 
 <GlobalCss />
-
-<QueryClientProvider {client}>
-    <App />
-</QueryClientProvider>
+<App />
