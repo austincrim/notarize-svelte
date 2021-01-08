@@ -13,7 +13,7 @@
     import Nav from './components/Nav.svelte';
     import MobileNav from './components/MobileNav.svelte';
 
-    let selectedNote = null;
+    let selectedNote: TNote = null;
 
     const queryClient = useQueryClient();
 
@@ -58,7 +58,7 @@
             <p class="text-lg">{$queryResult.error}</p>
         {:else}
             <ul
-                class="row-start-3 px-4 space-y-4 lg:row-start-auto lg:border-r"
+                class="row-start-3 pr-8 space-y-4 lg:row-start-auto lg:border-r"
             >
                 {#each $queryResult.data as note (note.id)}
                     <NotePreview

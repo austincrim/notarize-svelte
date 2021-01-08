@@ -1,5 +1,5 @@
 <script>
-    import { fade } from 'svelte/transition';
+    import { scale, fade } from 'svelte/transition';
 
     let expanded = false;
 </script>
@@ -44,8 +44,8 @@
     </div>
     {#if expanded}
         <div
-            transition:fade
-            class="absolute z-10 p-6 bg-white border rounded shadow-lg right-4 top-14"
+            transition:scale={{ start: 0.75, duration: 200, opacity: 0.75 }}
+            class="absolute z-10 p-6 bg-white border rounded-lg shadow-lg right-4 top-14"
         >
             <ul class="flex flex-col justify-around space-y-4">
                 <a class="block" href="#">
@@ -72,7 +72,7 @@
             </ul>
         </div>
         <div
-            transition:fade
+            transition:fade={{ duration: 200 }}
             on:click={() => (expanded = false)}
             class="absolute inset-0 bg-gray-200 opacity-50"
         />
