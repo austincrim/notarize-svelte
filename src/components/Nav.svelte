@@ -27,9 +27,18 @@
             <Button type="primary">
                 <li>Download Notes</li>
             </Button>
-            <Button type="secondary">
-                <li>Support</li>
-            </Button>
+            <li>
+                <a href="https://github.com/austincrim/notarize">
+                    <Button type="dark">
+                        <img
+                            class="inline-block w-8 h-8 mr-1"
+                            alt="github logo"
+                            src="/images/github-logo-light.png"
+                        />
+                        View Source
+                    </Button>
+                </a>
+            </li>
             <Button type="secondary">
                 <li>Log In</li>
             </Button>

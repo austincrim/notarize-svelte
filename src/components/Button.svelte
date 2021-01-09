@@ -22,6 +22,10 @@
             styles +=
                 'bg-red-200 text-red-900 hover:bg-red-300 active:bg-red-400 ';
             break;
+        case 'dark':
+            styles +=
+                'bg-gray-800 text-gray-50 hover:bg-gray-900 active:bg-gray-700 ';
+            break;
         default:
             break;
     }
