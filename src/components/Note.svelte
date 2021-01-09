@@ -34,24 +34,26 @@
         {#if !editing}
             <Button on:click={() => (editing = true)}>Edit</Button>
         {:else}
-            <Button
-                on:click={() => {
-                    editing = false;
-                    note.dateEdited = new Date();
-                    $notes = $notes;
-                }}
-                type="primary"
-            >
-                Save
-            </Button>
-            <Button
-                on:click={() => {
-                    editing = false;
-                    note.content = initialContent;
-                }}
-            >
-                Cancel
-            </Button>
+            <div class="flex flex-col space-y-2 md:block md:space-x-4">
+                <Button
+                    on:click={() => {
+                        editing = false;
+                        note.dateEdited = new Date();
+                        $notes = $notes;
+                    }}
+                    type="primary"
+                >
+                    Save
+                </Button>
+                <Button
+                    on:click={() => {
+                        editing = false;
+                        note.content = initialContent;
+                    }}
+                >
+                    Cancel
+                </Button>
+            </div>
         {/if}
     </div>
 </div>
