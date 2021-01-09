@@ -1,6 +1,6 @@
 <script>
-    import GlobalCss from './GlobalCss.svelte';
-    import App from './App.svelte';
+    import GlobalCss from './components/GlobalCss.svelte';
+    import App from './components/App.svelte';
 </script>
 
 <GlobalCss />
