@@ -1,20 +1,32 @@
 <script>
     import { v4 as uuid } from 'uuid';
-    import { notes } from './stores/notes';
-    import NotePreview from './components/NotePreview.svelte';
-    import Button from './components/Button.svelte';
-    import Note from './components/Note.svelte';
-    import Nav from './components/Nav.svelte';
-    import MobileNav from './components/MobileNav.svelte';
+    import { notes } from '../stores/notes';
+    import NotePreview from './NotePreview.svelte';
+    import Button from './Button.svelte';
+    import Note from './Note.svelte';
+    import Nav from './Nav.svelte';
+    import MobileNav from './MobileNav.svelte';
 
     let selectedNote = $notes[0];
+    let searchText = '';
+    $: filteredNotes = $notes.filter((n) =>
+        n.title.toLowerCase().includes(searchText)
+    );
 </script>
 
 <main>
     <MobileNav />
     <div class="grid min-h-screen grid-cols-1 p-8 lg:grid-cols-4 lg:gap-4">
         <ul class="row-start-3 pr-8 space-y-4 lg:row-start-auto lg:border-r">
-            {#each $notes as note (note.id)}
+            <label for="searchNotes" class="sr-only">Search Notes</label>
+            <input
+                id="searchNotes"
+                class="w-full p-2 bg-gray-100 rounded"
+                type="text"
+                placeholder="Search..."
+                bind:value={searchText}
+            />
+            {#each filteredNotes as note (note.id)}
                 <NotePreview
                     {note}
                     selected={selectedNote === note}

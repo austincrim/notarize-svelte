@@ -12,7 +12,7 @@
             : new Date(note.dateEdited).toLocaleDateString();
 </script>
 
-<div
+<li
     on:click
     transition:slide
     class={`flex justify-between gap-2 p-4 rounded ${selected && 'bg-gray-200'} hover:bg-gray-200 active:bg-gray-300 transition-all duration-100`}
@@ -42,4 +42,4 @@
         </svg>
         <span class="sr-only">Delete Note</span>
     </button>
-</div>
+</li>
