@@ -7,7 +7,7 @@
     import Nav from './Nav.svelte';
     import MobileNav from './MobileNav.svelte';
 
-    let selectedNote = $notes[0];
+    $: selectedNote = $notes[0];
     let searchText = '';
     $: filteredNotes = $notes.filter((n) =>
         n.title.toLowerCase().includes(searchText)
@@ -15,9 +15,9 @@
 </script>
 
 <main>
-    <MobileNav />
+    <MobileNav {selectedNote} />
     <div class="grid min-h-screen grid-cols-1 p-8 lg:grid-cols-4 lg:gap-4">
-        <ul class="row-start-3 pr-8 space-y-4 lg:row-start-auto lg:border-r">
+        <ul class="row-start-3 space-y-4 lg:pr-8 lg:row-start-auto lg:border-r">
             <label for="searchNotes" class="sr-only">Search Notes</label>
             <input
                 id="searchNotes"
@@ -66,7 +66,7 @@
         <div
             class="flex flex-col justify-end row-start-4 lg:row-start-auto lg:justify-between lg:border-l"
         >
-            <Nav />
+            <Nav {selectedNote} />
             <footer class="w-full text-sm text-center text-gray-500">
                 Austin Crim | 2021
             </footer>

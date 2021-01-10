@@ -1,11 +1,17 @@
 <script>
-    import { scale, fade } from 'svelte/transition';
+    export let selectedNote = null;
 
+    import { scale, fade } from 'svelte/transition';
+    import NavItems from './NavItems.svelte';
     let expanded = false;
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') expanded = false;
+    });
 </script>
 
 <nav
-    class="flex items-center justify-between w-full h-20 p-4 shadow-lg lg:hidden"
+    class="flex items-center justify-between w-full h-20 p-10 shadow-lg lg:hidden"
 >
     <div class="flex items-center justify-center">
         <svg
@@ -48,27 +54,7 @@
             class="absolute z-10 p-6 bg-white border rounded-lg shadow-lg right-4 top-14"
         >
             <ul class="flex flex-col justify-around space-y-4">
-                <a class="block" href="#">
-                    <li
-                        class="px-3 py-3 transition-colors rounded hover:bg-gray-100 active:bg-gray-200"
-                    >
-                        Download Note
-                    </li>
-                </a>
-                <a class="block" href="#">
-                    <li
-                        class="px-3 py-3 transition-colors rounded hover:bg-gray-100 active:bg-gray-200"
-                    >
-                        Contact Support
-                    </li>
-                </a>
-                <a class="block" href="#">
-                    <li
-                        class="px-3 py-3 transition-colors rounded hover:bg-gray-100 active:bg-gray-200"
-                    >
-                        Log Out
-                    </li>
-                </a>
+                <NavItems {selectedNote} />
             </ul>
         </div>
         <div

@@ -1,5 +1,7 @@
 <script>
-    import Button from './Button.svelte';
+    export let selectedNote = null;
+
+    import NavItems from './NavItems.svelte';
 </script>
 
 <div class="items-center hidden px-4 lg:flex lg:flex-col">
@@ -24,24 +26,7 @@
     </div>
     <nav class="mt-10">
         <ul class="flex flex-col space-y-8 text-center">
-            <Button type="primary">
-                <li>Download Notes</li>
-            </Button>
-            <li>
-                <a href="https://github.com/austincrim/notarize">
-                    <Button type="dark">
-                        <img
-                            class="inline-block w-8 h-8 mr-1"
-                            alt="github logo"
-                            src="/images/github-logo-light.png"
-                        />
-                        View Source
-                    </Button>
-                </a>
-            </li>
-            <Button type="secondary">
-                <li>Log In</li>
-            </Button>
+            <NavItems {selectedNote} />
         </ul>
     </nav>
 </div>

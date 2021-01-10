@@ -1,5 +1,6 @@
 <script>
     export let type = 'default';
+    export let disabled = false;
     export let classList = '';
 
     let styles =
@@ -33,6 +34,6 @@
     if (classList) styles += classList;
 </script>
 
-<button on:click class={styles}>
+<button {disabled} on:click class={styles}>
     <slot />
 </button>
