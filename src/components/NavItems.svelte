@@ -1,6 +1,7 @@
 <script>
     export let selectedNote = null;
 
+    import { now } from 'svelte/internal';
     import Button from './Button.svelte';
 </script>
 
@@ -27,5 +28,7 @@
     </a>
 </li>
 <li>
-    <Button classList="w-full" type="secondary">Log In</Button>
+    <a href="https://portfolio.austcrim.now.sh">
+        <Button classList="w-full" type="secondary">Say Hi</Button>
+    </a>
 </li>
