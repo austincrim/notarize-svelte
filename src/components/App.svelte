@@ -19,6 +19,8 @@
             )
         ) {
             selectedNote = $notes[0];
+        } else {
+            selectedNote = selectedNote;
         }
     }
     let searchText = '';

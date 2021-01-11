@@ -26,7 +26,10 @@
         {#if !editing}
             <h2 class="text-2xl">{note.title}</h2>
         {:else}
-            <input class="p-2 bg-gray-100 rounded" bind:value={note.title} />
+            <input
+                class="p-2 bg-gray-100 rounded focus:ring"
+                bind:value={note.title}
+            />
         {/if}
         <div class="text-gray-600">{displayDate}</div>
     </div>
@@ -61,7 +64,7 @@
 {#if editing}
     <textarea
         bind:value={note.content}
-        class="min-w-full min-h-screen p-2 mt-10 bg-gray-100 rounded"
+        class="min-w-full min-h-screen p-2 mt-10 bg-gray-100 rounded focus:ring"
     />
 {:else}
     <p class="mt-10 prose max-w-1/2">
