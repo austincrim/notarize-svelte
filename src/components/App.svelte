@@ -7,7 +7,7 @@
     import Nav from './Nav.svelte';
     import MobileNav from './MobileNav.svelte';
 
-    $: selectedNote = $notes[0];
+    let selectedNote = $notes[0];
     let searchText = '';
     $: filteredNotes = $notes.filter((n) =>
         n.title.toLowerCase().includes(searchText)
@@ -21,7 +21,7 @@
             <label for="searchNotes" class="sr-only">Search Notes</label>
             <input
                 id="searchNotes"
-                class="w-full p-2 bg-gray-100 rounded"
+                class="w-full p-2 bg-gray-100 rounded focus:ring"
                 type="text"
                 placeholder="Search..."
                 bind:value={searchText}

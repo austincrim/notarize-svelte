@@ -4,7 +4,7 @@
     export let classList = '';
 
     let styles =
-        'px-4 py-2 rounded hover:-translate-y-1 hover:shadow active:translate-y-0 transform transition-all ';
+        'px-4 py-2 rounded hover:-translate-y-1 hover:shadow active:translate-y-0 transform transition-all focus:ring ';
 
     switch (type) {
         case 'default':

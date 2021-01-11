@@ -22,6 +22,7 @@
         <div class="text-sm">{displayDate}</div>
     </div>
     <button
+        class="focus:ring ring-red-500"
         on:click|stopPropagation={() => ($notes = $notes.filter((n) => n.id !== note.id))}
     >
         <svg

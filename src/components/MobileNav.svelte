@@ -31,7 +31,7 @@
         <h1 class="font-serif text-3xl font-bold text-green-400">Notarize</h1>
     </div>
     <div>
-        <button on:click={() => (expanded = !expanded)}>
+        <button class="focus:ring" on:click={() => (expanded = !expanded)}>
             <svg
                 class="w-8 h-8 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
