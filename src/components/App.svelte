@@ -14,8 +14,8 @@
         } else if (
             !$notes.find(
                 (n) =>
-                    n.content === selectedNote.content &&
-                    n.dateEdited === selectedNote.dateEdited
+                    n.content === selectedNote?.content &&
+                    n.dateEdited === selectedNote?.dateEdited
             )
         ) {
             selectedNote = $notes[0];
