@@ -8,6 +8,18 @@
     import MobileNav from './MobileNav.svelte';
 
     let selectedNote = $notes[0];
+    $: {
+        if (!$notes[0]) selectedNote = null;
+        if (
+            !$notes.find(
+                (n) =>
+                    n.content === selectedNote.content &&
+                    n.dateEdited === selectedNote.dateEdited
+            )
+        ) {
+            selectedNote = $notes[0];
+        }
+    }
     let searchText = '';
     $: filteredNotes = $notes.filter((n) =>
         n.title.toLowerCase().includes(searchText)

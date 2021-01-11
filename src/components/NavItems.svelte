@@ -1,7 +1,6 @@
 <script>
     export let selectedNote = null;
 
-    import { now } from 'svelte/internal';
     import Button from './Button.svelte';
 </script>
 
