@@ -9,8 +9,9 @@
 
     let selectedNote = $notes[0];
     $: {
-        if (!$notes[0]) selectedNote = null;
-        if (
+        if (!$notes[0]) {
+            selectedNote = null;
+        } else if (
             !$notes.find(
                 (n) =>
                     n.content === selectedNote.content &&
